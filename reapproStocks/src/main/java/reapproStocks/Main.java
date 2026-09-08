@@ -1,6 +1,8 @@
 package reapproStocks;
 
-import javax.swing.*;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  * Classe principale (point d'entrée) de l'application de
