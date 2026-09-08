@@ -1,0 +1,17 @@
+# Fichiers compilés
+target/
+*.class
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Fichiers générés
+dist/
+*.exe
+*.msi
+
+# Système
+.DS_Store
+Thumbs.db
