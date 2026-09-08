@@ -9,8 +9,13 @@ target/
 
 # Fichiers générés
 dist/
+dist-installer/
+release/
 *.exe
 *.msi
+
+# Outils locaux (WiX portable)
+tools/
 
 # Système
 .DS_Store
