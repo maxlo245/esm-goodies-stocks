@@ -32,17 +32,36 @@ public class Main {
         GestionStocksData data = new GestionStocksData();
 
         // Lancement de l'interface graphique dans le thread dédié (EDT)
-        SwingUtilities.invokeLater(() -> {
+        SwingUtilities.invokeLater(() -> creerEtAfficherFenetre(data));
+    }
+
+    /**
+     * Crée la fenêtre principale, l'affiche et la place au premier plan.
+     */
+    private static void creerEtAfficherFenetre(GestionStocksData data) {
+        try {
+            MainFrame frame = new MainFrame(data);
+            frame.setVisible(true);
+            frame.setLocation(100, 100);          // position fixe sur l'écran
+            frame.toFront();                      // met la fenêtre au premier plan
+            frame.requestFocus();                 // donne le focus
+            frame.setAlwaysOnTop(true);           // s'assure qu'elle passe au-dessus
+            java.awt.EventQueue.invokeLater(() -> {
+                frame.setAlwaysOnTop(false);      // après affichage, on retire le "toujours au-dessus"
+                frame.toFront();
+            });
+        } catch (Throwable t) {
+            // En cas d'erreur au démarrage, on l'affiche clairement
+            System.err.println("Erreur au lancement de l'application :");
+            t.printStackTrace();
             try {
-                MainFrame frame = new MainFrame(data);
-                frame.setVisible(true);
-            } catch (Throwable t) {
-                System.err.println("Erreur au lancement de l'application :");
-                t.printStackTrace();
                 JOptionPane.showMessageDialog(null,
-                    "Erreur au démarrage : " + t.getMessage(),
-                    "Erreur", JOptionPane.ERROR_MESSAGE);
+                    "Impossible de démarrer l'application :\n" + t.getMessage() +
+                    "\n\nPlus de détails dans la console.",
+                    "Erreur de démarrage", JOptionPane.ERROR_MESSAGE);
+            } catch (Throwable t2) {
+                System.err.println("Erreur supplémentaire lors de l'affichage du message : " + t2.getMessage());
             }
-        });
+        }
     }
 }
