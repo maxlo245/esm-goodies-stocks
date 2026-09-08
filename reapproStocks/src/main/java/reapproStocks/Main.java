@@ -1,5 +1,6 @@
 package reapproStocks;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -32,8 +33,16 @@ public class Main {
 
         // Lancement de l'interface graphique dans le thread dédié (EDT)
         SwingUtilities.invokeLater(() -> {
-            MainFrame frame = new MainFrame(data);
-            frame.setVisible(true);
+            try {
+                MainFrame frame = new MainFrame(data);
+                frame.setVisible(true);
+            } catch (Throwable t) {
+                System.err.println("Erreur au lancement de l'application :");
+                t.printStackTrace();
+                JOptionPane.showMessageDialog(null,
+                    "Erreur au démarrage : " + t.getMessage(),
+                    "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
         });
     }
 }

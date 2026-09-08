@@ -449,9 +449,6 @@ public class MainFrame extends JFrame {
             rafraichirRupture();
         });
 
-        comboCoureur.addActionListener(e -> { rafraichirComboCoureurs(comboCoureur); });
-        comboType.addActionListener(e -> { rafraichirComboTypes(comboType); });
-
         // Table des réservations
         tableReservations = new JTable();
         tableReservations.setModel(creerModeleReservations());
